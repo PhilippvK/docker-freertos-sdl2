@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  osx:
+    image: "philippvk/docker-freertos-sdl2:14.04"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake /tmp/project && tail -f /dev/null"
+    volumes:
+      - ${DIR}:/tmp/project:ro
+      - ${DIR}:/tmp/project/bin
+    environment:
+      - "DISPLAY=host.docker.internal:0.0"
+  unix:
+    image: "philippvk/docker-freertos-sdl2:14.04"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake /tmp/project && tail -f /dev/null"
+    volumes:
+      - ${DIR}/Users/Philipp/src/work/rcs/espl/FreeRTOS-Emulator-Docker/:/tmp/project:ro
+      - ${DIR}/Users/Philipp/src/work/rcs/espl/FreeRTOS-Emulator-Docker/bin:/tmp/project/bin
+    environment:
+      - "DISPLAY=host.docker.internal:0.0"
+  win:
+    image: "philippvk/docker-freertos-sdl2:14.04"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake /tmp/project && tail -f /dev/null"
+    volumes:
+      - ${DIR}:/tmp/project:ro
+      - ${DIR}/bin:/tmp/project/bin
+    environment:
+      - "DISPLAY=host.docker.internal:0.0"
