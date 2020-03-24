@@ -2,7 +2,7 @@ version: '3.3'
 services:
   osx:
     image: "philippvk/docker-freertos-sdl2:14.04"
-    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=osx /tmp/project && tail -f /dev/null"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=osx -DEMULATOR=true /tmp/project && tail -f /dev/null"
     volumes:
       - ${DIR}:/tmp/project:ro
       - ${DIR}/bin:/tmp/project/bin
@@ -10,7 +10,7 @@ services:
       - "DISPLAY=host.docker.internal:0.0"
   unix:
     image: "philippvk/docker-freertos-sdl2:14.04"
-    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=unix /tmp/project && tail -f /dev/null"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=unix -DEMULATOR=true /tmp/project && tail -f /dev/null"
     volumes:
       - ${DIR}:/tmp/project:ro
       - ${DIR}/bin:/tmp/project/bin
@@ -19,7 +19,7 @@ services:
       - "DISPLAY"
   win:
     image: "philippvk/docker-freertos-sdl2:14.04"
-    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=win /tmp/project && tail -f /dev/null"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=win -DEMULATOR=true /tmp/project && tail -f /dev/null"
     volumes:
       - ${DIR}:/tmp/project:ro
       - ${DIR}/bin:/tmp/project/bin
