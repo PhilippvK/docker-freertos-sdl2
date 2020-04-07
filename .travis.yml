@@ -9,3 +9,9 @@ before_install:
 
 script:
   - date
+
+deploy:
+  provider: script
+  script: bash push2dockerhub.sh
+  on:
+    branch: master
