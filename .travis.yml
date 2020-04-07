@@ -8,7 +8,11 @@ before_install:
   - docker run philippvk/docker-freertos-sdl2:14.04 /bin/sh -c "echo 123"
 
 script:
-  - date
+  - git clone https://github.com/PhilippvK/FreeRTOS-Emulator.git
+  - cd FreeRTOS-Emulator
+  - git checkout emulator
+  - cd docker
+  - make start
 
 deploy:
   provider: script
