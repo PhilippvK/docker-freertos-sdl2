@@ -1,0 +1,11 @@
+language: bash
+
+services:
+  - docker
+
+before_install:
+  - docker build -t docker-freertos-sdl2:14.04 .
+  - docker run docker-freertos-sdl2:14.04 /bin/sh -c "echo 123"
+
+script:
+  - date
