@@ -1,3 +1,3 @@
 #!/bin/bash
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-docker push philippvk/docker-freertos-sdl2
+docker push philippvk/docker-freertos-sdl2:14.04
