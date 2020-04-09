@@ -1,27 +1,36 @@
 version: '3.3'
 services:
-  osx:
+  darwin:
     image: "philippvk/docker-freertos-sdl2:14.04"
-    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=osx -DEMULATOR=true /tmp/project && tail -f /dev/null"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DINSIDE_DOCKER=true -DENABLE_CLANG_TIDY=ON /tmp/project && tail -f /dev/null"
+    privileged: true
     volumes:
-      - ${DIR}:/tmp/project:ro
-      - ${DIR}/bin:/tmp/project/bin
+      - ${PROJECT_DIR}:/tmp/project:ro
+      - ${PROJECT_DIR}/bin:/tmp/project/bin
+    ports:
+      - "2000:2000"
     environment:
       - "DISPLAY=host.docker.internal:0.0"
-  unix:
+  linux:
     image: "philippvk/docker-freertos-sdl2:14.04"
-    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=unix -DEMULATOR=true /tmp/project && tail -f /dev/null"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DINSIDE_DOCKER=true -DENABLE_CLANG_TIDY=ON /tmp/project && tail -f /dev/null"
+    privileged: true
     volumes:
-      - ${DIR}:/tmp/project:ro
-      - ${DIR}/bin:/tmp/project/bin
+      - ${PROJECT_DIR}:/tmp/project:ro
+      - ${PROJECT_DIR}/bin:/tmp/project/bin
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    ports:
+      - "2000:2000"
     environment:
       - "DISPLAY"
-  win:
+  windows:
     image: "philippvk/docker-freertos-sdl2:14.04"
-    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DHOST_OS=win -DEMULATOR=true /tmp/project && tail -f /dev/null"
+    command: /bin/bash -c "rm -rf /tmp/build && mkdir /tmp/build && cd /tmp/build && cmake -DINSIDE_DOCKER=true -DENABLE_CLANG_TIDY=ON /tmp/project && tail -f /dev/null"
+    privileged: true
     volumes:
-      - ${DIR}:/tmp/project:ro
-      - ${DIR}/bin:/tmp/project/bin
+      - ${PROJECT_DIR}:/tmp/project:ro
+      - ${PROJECT_DIR}/bin:/tmp/project/bin
+    ports:
+      - "2000:2000"
     environment:
       - "DISPLAY=host.docker.internal:0.0"
