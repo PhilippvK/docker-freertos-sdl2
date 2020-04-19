@@ -14,6 +14,7 @@ RUN apt-get -yqq update && \
     wget \
     vim \
     dbus \
+    astyle \
     psmisc &&\
   apt-get install -yqq --no-install-recommends \
     libegl1-mesa-dev \
